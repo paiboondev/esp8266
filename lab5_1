@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "MY_WIFI";
-const char* password = "12345678";
+const char* ssid = "AUToA50x";
+const char* password = "45554555";
 
 int ledPin1 = D0; // pin D0
 int ledPin2 = D1; // pin D1
@@ -75,48 +75,48 @@ void loop() {
   // Match the request
   
   // Link URL LED 1
-  if (request.indexOf("/LED1=ON") != -1) {
+  if (request.indexOf("/LED1=OFF") != -1) {
     digitalWrite(ledPin1, LOW);
     ch1 = 1;
   }
-  if (request.indexOf("/LED1=OFF") != -1) {
+  if (request.indexOf("/LED1=ON") != -1) {
     digitalWrite(ledPin1, HIGH);
     ch1 = 0;
   }
 
   // Link URL LED 2
-  if (request.indexOf("/LED2=ON") != -1) {
+  if (request.indexOf("/LED2=OFF") != -1) {
     digitalWrite(ledPin2, LOW);
     Serial.println("OK2");
     ch2 = 1;
   }
 
-  if (request.indexOf("/LED2=OFF") != -1) {
+  if (request.indexOf("/LED2=ON") != -1) {
     digitalWrite(ledPin2, HIGH);
     Serial.println("OK2");
     ch2 = 0;
   }
 
   // Link URL LED 3
-  if (request.indexOf("/LED3=ON") != -1) {
+  if (request.indexOf("/LED3=OFF") != -1) {
     digitalWrite(ledPin3, LOW);
     Serial.println("OK3");
     ch3 = 1;
   }
 
-  if (request.indexOf("/LED3=OFF") != -1) {
+  if (request.indexOf("/LED3=ON") != -1) {
     digitalWrite(ledPin3, HIGH);
     Serial.println("OK3");
     ch3 = 0;
   }
 
   // Link URL LED 4
-  if (request.indexOf("/LED4=ON") != -1) {
+  if (request.indexOf("/LED4=OFF") != -1) {
     digitalWrite(ledPin4, LOW);
     ch4 = 1;
   }
 
-  if (request.indexOf("/LED4=OFF") != -1) {
+  if (request.indexOf("/LED4=ON") != -1) {
     digitalWrite(ledPin4, HIGH);
     ch4 = 0;
   }
@@ -130,27 +130,27 @@ void loop() {
 
   client.print("Led pin D1 : ");
   if (ch1 == 1) {
-    client.print("On<br>");
-  } else {
     client.print("Off<br>");
+  } else {
+    client.print("On<br>");
   }
   client.print("Led pin D2 : ");
   if (ch2 == 1) {
-    client.print("On<br>");
-  } else {
     client.print("Off<br>");
+  } else {
+    client.print("On<br>");
   }
   client.print("Led pin D3 : ");
   if (ch3 == 1) {
-    client.print("On<br>");
-  } else {
     client.print("Off<br>");
+  } else {
+    client.print("On<br>");
   }
   client.print("Led pin D4 : ");
   if (ch4 == 1) {
-    client.print("On<br>");
-  } else {
     client.print("Off<br>");
+  } else {
+    client.print("On<br>");
   }
 
   client.println("");
