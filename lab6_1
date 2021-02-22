@@ -1,0 +1,57 @@
+#define BLYNK_PRINT Serial
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+#include <DHT.h>
+DHT dht;
+
+// You should get Auth Token in the Blynk App.
+// Go to the Project Settings (nut icon).
+char auth[] = "YourAuthToken";
+
+char ssid[] = "YourNetworkName";
+char pass[] = "YourPassword";
+
+const int switch_1 = D5; // gpio14
+const int switch_2 = D6; // gpio12
+const int switch_3 = D7; // gpio13
+const int switch_4 = D8; // gpio15
+
+BlynkTimer timer;
+
+void sendSensor()
+{
+  float h = dht.getHumidity();
+  float t = dht.getTemperature();
+ 
+  if (isnan(h) || isnan(t)) {
+    Serial.println("Failed to read from DHT sensor!");
+    return;
+  }
+
+  Blynk.virtualWrite(V5, t);
+  Blynk.virtualWrite(V6, h);
+}
+ 
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(switch_1,OUTPUT);
+  pinMode(switch_2,OUTPUT);
+  pinMode(switch_3,OUTPUT);
+  pinMode(switch_4,OUTPUT);
+  
+  digitalWrite(switch_1,LOW);
+  digitalWrite(switch_2,LOW);
+  digitalWrite(switch_3,LOW);
+  digitalWrite(switch_4,LOW);
+  
+  Blynk.begin(auth, ssid, pass, "blynk.iot-cm.com", 8080);  
+  dht.setup(2); // data pin 2 (D4)
+  timer.setInterval(1000L, sendSensor);
+}
+ 
+void loop()
+{
+  Blynk.run();
+  timer.run();
+}
