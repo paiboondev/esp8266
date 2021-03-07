@@ -8,7 +8,7 @@
 #define WIFI_SSID "AUTo_WiFi"
 #define WIFI_PASSWORD "45554555"
 
-#define DHTPIN 2    // Connect Data pin of DHT to D2
+#define DHTPIN 2    // Connect Data pin of DHT to D4(GPIO2)
 //int led = D5;     // Connect LED to D5
 DHT dht;
 
